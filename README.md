@@ -1,58 +1,75 @@
 # Sisig Babi - E-Commerce Website
 
-A full-stack e-commerce web application for **Sisig Babi**, a Filipino sisig restaurant. Built with React, Node.js, Express, and MySQL.
+A full-stack e-commerce web application developed for a Filipino sisig restaurant. The system enables customers to order food online while providing administrators with tools for managing products, orders, and customers.
 
 ---
 
-## Tech Stack
+## 1. Technology Stack
 
 ### Frontend
-- React + Vite
-- Tailwind CSS
-- React Router DOM
-- Axios
+
+* React (Vite)
+* Tailwind CSS
+* React Router DOM
+* Axios
 
 ### Backend
-- Node.js + Express
-- MySQL
-- JWT Authentication
-- Cloudinary (Image Upload)
-- Nodemailer (Email)
-- Bcryptjs
+
+* Node.js
+* Express.js
+* MySQL
+* JSON Web Token (JWT)
+* bcryptjs
+
+### Third-Party Services
+
+* Cloudinary (Image Upload)
+* Resend (Email Service)
 
 ---
 
-## Features
+## 2. System Features
 
-### Customer Side
-- Landing page with Online Order / Walk-In choice
-- User Authentication (Register, Login, Logout, Forgot Password)
-- Homepage with animated best seller hero slider and featured carousel
-- Menu page with category filter and add to cart
-- Product page with spicy option and add-ons (extra egg/rice)
-- Shopping cart with quantity controls
-- Checkout (Delivery/Pickup, COD/GCash/Maya)
-- Order tracking with progress bar
-- Cancel order (pending orders only)
+### 2.1 Customer Module
 
-### POS System (Walk-In)
-- No login required
-- Order by name
-- Cash/GCash/Maya payment
-- Print receipt
+* Landing page with option for Online Order or Walk-In
+* User authentication (Register, Login, Logout, Forgot Password, Reset Password)
+* Homepage with featured products and best sellers
+* Menu page with category filtering and add-to-cart functionality
+* Product page with add-ons (e.g., extra egg, extra rice)
+* Shopping cart with quantity management
+* Checkout system (Delivery or Pickup; Cash, GCash, Maya)
+* Order tracking with status updates
+* Order cancellation (pending orders only)
 
-### Admin Panel
-- Dashboard with stats (total orders, revenue, customers, products)
-- Product management (add, edit, delete, image upload via Cloudinary)
-- Order management (view all, update status, walk-in/online badge)
-- Customer management (view, ban/unban)
+### 2.2 Point-of-Sale (POS) Module
+
+* Walk-in ordering without account login
+* Customer name-based ordering
+* Payment options (Cash, GCash, Maya)
+* Receipt generation and printing
+
+### 2.3 Admin Module
+
+* Dashboard with system statistics (orders, revenue, customers, products)
+* Product management (create, update, delete, image upload)
+* Order management (view, update status, identify walk-in vs online orders)
+* Customer management (view users, ban/unban accounts)
+
+### 2.4 Core System Features
+
+* Role-based authentication and authorization
+* Secure password handling using hashing
+* Cloud-based image storage
+* Email-based password recovery system
 
 ---
 
-## Project Structure
+## 3. Project Structure
+
 ```
 Doricodes(WebEng)/
-├── client/          # React Frontend (port 5173)
+├── client/          # Frontend (React)
 │   ├── src/
 │   │   ├── assets/
 │   │   ├── components/
@@ -62,7 +79,7 @@ Doricodes(WebEng)/
 │   │   │   ├── auth/
 │   │   │   └── customer/
 │   │   └── utils/
-└── server/          # Express Backend (port 5000)
+└── server/          # Backend (Express)
     ├── config/
     ├── controllers/
     ├── middleware/
@@ -72,26 +89,30 @@ Doricodes(WebEng)/
 
 ---
 
-## Setup and Installation
+## 4. Setup and Installation
 
 ### Prerequisites
-- Node.js
-- MySQL
 
-### 1. Clone the repository
-```bash
+* Node.js
+* MySQL
+
+### 4.1 Clone Repository
+
+```
 git clone https://github.com/Sedorico/Sisig-Babi-WebSite.git
 cd Sisig-Babi-WebSite
 ```
 
-### 2. Setup Backend
-```bash
+### 4.2 Backend Setup
+
+```
 cd server
 npm install
 ```
 
-Create `.env` file in `server/`:
-```env
+Create a `.env` file in the `server/` directory:
+
+```
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=your_password
@@ -103,127 +124,63 @@ CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 ```
 
-### 3. Setup Database
-Create a MySQL database named `sisigan_db` and run the following:
-```sql
-CREATE TABLE users (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
-  email VARCHAR(100) NOT NULL UNIQUE,
-  password VARCHAR(255) NOT NULL,
-  role ENUM('customer', 'admin') DEFAULT 'customer',
-  is_banned TINYINT(1) DEFAULT 0,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+### 4.3 Database Setup
 
-CREATE TABLE products (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
-  description TEXT,
-  price DECIMAL(10,2) NOT NULL,
-  category VARCHAR(100) NOT NULL,
-  is_spicy TINYINT(1) DEFAULT 0,
-  stock INT DEFAULT 0,
-  image VARCHAR(255),
-  is_featured TINYINT(1) DEFAULT 0,
-  is_best_seller TINYINT(1) DEFAULT 0,
-  is_available TINYINT(1) DEFAULT 1,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+Create a MySQL database named `sisigan_db` and execute the required table structures.
 
-CREATE TABLE orders (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT,
-  guest_name VARCHAR(100),
-  total_amount DECIMAL(10,2) NOT NULL,
-  delivery_type VARCHAR(50) NOT NULL,
-  address TEXT,
-  contact_number VARCHAR(20),
-  payment_method VARCHAR(50) NOT NULL,
-  status VARCHAR(50) DEFAULT 'pending',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(id)
-);
+### 4.4 Frontend Setup
 
-CREATE TABLE order_items (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  order_id INT NOT NULL,
-  product_id INT NOT NULL,
-  quantity INT NOT NULL,
-  price DECIMAL(10,2) NOT NULL,
-  extra_egg TINYINT(1) DEFAULT 0,
-  extra_rice TINYINT(1) DEFAULT 0,
-  FOREIGN KEY (order_id) REFERENCES orders(id),
-  FOREIGN KEY (product_id) REFERENCES products(id)
-);
-
-CREATE TABLE reviews (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id INT NOT NULL,
-  product_id INT NOT NULL,
-  rating INT NOT NULL,
-  comment TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (product_id) REFERENCES products(id)
-);
 ```
-
-### 4. Setup Frontend
-```bash
 cd client
 npm install
 ```
 
-### 5. Run the Application
+### 4.5 Run the Application
 
 Backend:
-```bash
+
+```
 cd server
 npm run dev
 ```
 
 Frontend:
-```bash
+
+```
 cd client
 npm run dev
 ```
 
 ---
 
-## Deployment
+## 5. Deployment
 
-- Frontend: [Vercel](https://sisig-babi-web-site.vercel.app)
-- Backend: [Railway](https://sisig-babi-website-production.up.railway.app)
-- Database: MySQL on Railway
-
----
-
-## Default Accounts
-
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@sisigan.com | admin123 |
+* Frontend: [https://sisig-babi-web-site.vercel.app](https://sisig-babi-web-site.vercel.app)
+* Backend: [https://sisig-babi-website-production.up.railway.app](https://sisig-babi-website-production.up.railway.app)
+* Database: MySQL hosted on Railway
 
 ---
 
-## Mobile Responsive
+## 6. System Behavior
 
-The website is fully responsive and works on desktop, tablet, and mobile devices.
+* After login:
 
----
-
-## Developer
-
-[GitHub](https://github.com/Sedorico)
+  * Customer is redirected to `/home`
+  * Administrator is redirected to `/admin`
+* After logout: redirected to `/`
 
 ---
 
-## License
+## 7. Key Notes
 
-This project is for educational purposes only.
-```
+* Cart data is stored using localStorage
+* Administrative routes are protected
+* Product images are stored in Cloudinary and accessed via URL
+* Backend services are deployed using Railway
 
-I-replace mo yung `README.md` sa:
-```
-C:\Users\Karl\OneDrive\Documents\Doricodes(WebEng)\README.md
+---
+
+## 8. Developer Reference
+
+GitHub Repository:
+[https://github.com/Sedorico](https://github.com/Sedorico)
