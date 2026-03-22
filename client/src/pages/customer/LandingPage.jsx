@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import API from '../../utils/axios'
 import heroBg from '../../assets/hero-bg.jpg'
+import { useAuth } from '../../context/AuthContext'
 
 const LandingPage = () => {
   const navigate = useNavigate()
+  const { user } = useAuth()
   const [bestSellers, setBestSellers] = useState([])
   const [heroIndex, setHeroIndex] = useState(0)
   const [heroAnimating, setHeroAnimating] = useState(false)
@@ -33,6 +35,16 @@ const LandingPage = () => {
     }, 4000)
     return () => clearInterval(interval)
   }, [bestSellers])
+
+  const handleLogoClick = () => {
+    if (user?.role === 'admin') {
+      navigate('/admin')
+    } else if (user) {
+      navigate('/home')
+    } else {
+      navigate('/login')
+    }
+  }
 
   return (
     <div className="min-h-screen relative flex items-center justify-center overflow-hidden">
@@ -67,7 +79,7 @@ const LandingPage = () => {
       <div className="relative z-10 text-center px-6">
         {/* Secret Admin Button — Logo */}
         <div
-          onClick={() => navigate('/login')}
+          onClick={handleLogoClick}
           className="cursor-pointer w-16 h-16 md:w-24 md:h-24 mx-auto mb-4 md:mb-6 rounded-2xl overflow-hidden opacity-90 hover:opacity-100 transition-all duration-300 hover:ring-2 hover:ring-orange-500/50"
         >
           <img src="/logo.png" alt="Sisig Babi" className="w-full h-full object-contain" />
