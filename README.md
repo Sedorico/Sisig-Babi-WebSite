@@ -1,10 +1,10 @@
-# 🍳 Sisig Babi - E-Commerce Website
+# Sisig Babi - E-Commerce Website
 
 A full-stack e-commerce web application for **Sisig Babi**, a Filipino sisig restaurant. Built with React, Node.js, Express, and MySQL.
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
 ### Frontend
 - React + Vite
@@ -16,18 +16,18 @@ A full-stack e-commerce web application for **Sisig Babi**, a Filipino sisig res
 - Node.js + Express
 - MySQL
 - JWT Authentication
-- Multer (Image Upload)
+- Cloudinary (Image Upload)
 - Nodemailer (Email)
 - Bcryptjs
 
 ---
 
-## ✨ Features
+## Features
 
-### 🛒 Customer Side
+### Customer Side
 - Landing page with Online Order / Walk-In choice
 - User Authentication (Register, Login, Logout, Forgot Password)
-- Homepage with animated best seller hero slider + featured carousel
+- Homepage with animated best seller hero slider and featured carousel
 - Menu page with category filter and add to cart
 - Product page with spicy option and add-ons (extra egg/rice)
 - Shopping cart with quantity controls
@@ -35,21 +35,21 @@ A full-stack e-commerce web application for **Sisig Babi**, a Filipino sisig res
 - Order tracking with progress bar
 - Cancel order (pending orders only)
 
-### 🏪 POS System (Walk-In)
+### POS System (Walk-In)
 - No login required
 - Order by name
 - Cash/GCash/Maya payment
 - Print receipt
 
-### 👨‍💼 Admin Panel
+### Admin Panel
 - Dashboard with stats (total orders, revenue, customers, products)
-- Product management (add, edit, delete, image upload)
+- Product management (add, edit, delete, image upload via Cloudinary)
 - Order management (view all, update status, walk-in/online badge)
 - Customer management (view, ban/unban)
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 ```
 Doricodes(WebEng)/
 ├── client/          # React Frontend (port 5173)
@@ -72,7 +72,7 @@ Doricodes(WebEng)/
 
 ---
 
-## ⚙️ Setup & Installation
+## Setup and Installation
 
 ### Prerequisites
 - Node.js
@@ -98,6 +98,9 @@ DB_PASSWORD=your_password
 DB_NAME=sisigan_db
 JWT_SECRET=your_jwt_secret
 PORT=5000
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
 
 ### 3. Setup Database
@@ -174,13 +177,13 @@ npm install
 
 ### 5. Run the Application
 
-**Backend:**
+Backend:
 ```bash
 cd server
 npm run dev
 ```
 
-**Frontend:**
+Frontend:
 ```bash
 cd client
 npm run dev
@@ -188,24 +191,39 @@ npm run dev
 
 ---
 
-## 🔑 Default Accounts
+## Deployment
+
+- Frontend: [Vercel](https://sisig-babi-web-site.vercel.app)
+- Backend: [Railway](https://sisig-babi-website-production.up.railway.app)
+- Database: MySQL on Railway
+
+---
+
+## Default Accounts
 
 | Role | Email | Password |
 |------|-------|----------|
-| Admin | admin@sisigan.com | password |
-| Customer | karl@gmail.com | password123 |
+| Admin | admin@sisigan.com | admin123 |
 
 ---
 
-## 📱 Mobile Responsive
-The website is fully responsive — works on desktop, tablet, and mobile devices.
+## Mobile Responsive
+
+The website is fully responsive and works on desktop, tablet, and mobile devices.
 
 ---
 
-## 👨‍💻 Developer
-**Karl** - [GitHub](https://github.com/Sedorico)
+## Developer
+
+[GitHub](https://github.com/Sedorico)
 
 ---
 
-## 📄 License
+## License
+
 This project is for educational purposes only.
+```
+
+I-replace mo yung `README.md` sa:
+```
+C:\Users\Karl\OneDrive\Documents\Doricodes(WebEng)\README.md
