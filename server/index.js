@@ -8,7 +8,11 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -24,7 +28,13 @@ app.use('/api/orders', orderRoutes);
 
 // Test route
 app.get('/', (req, res) => {
-  res.json({ message: 'Sisigan API is running! 🔥' });
+  res.json({ 
+    message: 'Sisigan API is running! 🔥',
+    db_host: process.env.DB_HOST ? 'SET' : 'NOT SET',
+    db_user: process.env.DB_USER ? 'SET' : 'NOT SET',
+    db_name: process.env.DB_NAME ? 'SET' : 'NOT SET',
+    db_port: process.env.DB_PORT ? 'SET' : 'NOT SET',
+  });
 });
 
 // Start server
