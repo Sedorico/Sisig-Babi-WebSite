@@ -73,7 +73,7 @@ const Cart = () => {
                 <div key={index} className="flex items-center gap-3 md:gap-4 py-3 md:py-4 border-b border-white/10">
                   <div className="relative shrink-0">
                     <img
-                      src={`http://localhost:5000/uploads/${item.image}`}
+                      src={`https://sisig-babi-website-production.up.railway.app/uploads/${item.image}`}
                       alt={item.name}
                       className="w-14 h-14 md:w-16 md:h-16 object-cover rounded-xl"
                       onError={(e) => { e.target.src = 'https://placehold.co/64x64/1a1a1a/666?text=No' }}

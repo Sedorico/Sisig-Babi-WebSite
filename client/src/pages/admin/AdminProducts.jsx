@@ -64,7 +64,7 @@ const AdminProducts = () => {
       is_available: product.is_available !== undefined ? product.is_available : 1,
     })
     setImageFile(null)
-    setImagePreview(product.image ? `http://localhost:5000/uploads/${product.image}` : null)
+    setImagePreview(product.image ? `https://sisig-babi-website-production.up.railway.app/uploads/${product.image}` : null)
     setError('')
     setShowModal(true)
   }
@@ -176,7 +176,7 @@ const AdminProducts = () => {
                       <tr key={product.id} className="border-t border-white/10 hover:bg-white/10 transition">
                         <td className="px-4 py-3">
                           <img
-                            src={`http://localhost:5000/uploads/${product.image}`}
+                            src={`https://sisig-babi-website-production.up.railway.app/uploads/${product.image}`}
                             alt={product.name}
                             className="w-12 h-12 object-cover rounded-lg"
                             onError={(e) => { e.target.src = 'https://placehold.co/48x48/333/666?text=No' }}

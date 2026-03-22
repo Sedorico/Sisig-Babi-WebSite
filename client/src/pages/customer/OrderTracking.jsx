@@ -166,7 +166,7 @@ const OrderTracking = () => {
                   {order.items && order.items.map((item, index) => (
                     <div key={index} className="flex items-center gap-4">
                       <img
-                        src={`http://localhost:5000/uploads/${item.image}`}
+                        src={`https://sisig-babi-website-production.up.railway.app/uploads/${item.image}`}
                         alt={item.name}
                         className="w-12 h-12 object-cover rounded-lg"
                         onError={(e) => { e.target.src = 'https://placehold.co/48x48/1a1a1a/666?text=No' }}

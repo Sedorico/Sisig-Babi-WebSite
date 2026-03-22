@@ -207,7 +207,7 @@ const POS = () => {
                     className="relative rounded-xl overflow-hidden h-32 md:h-40 group hover:ring-2 hover:ring-orange-500 transition-all"
                   >
                     <img
-                      src={`http://localhost:5000/uploads/${product.image}`}
+                      src={`https://sisig-babi-website-production.up.railway.app/uploads/${product.image}`}
                       alt={product.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       onError={(e) => { e.target.src = 'https://placehold.co/200x160/1a1a1a/666?text=No+Image' }}
@@ -245,7 +245,7 @@ const POS = () => {
             ) : (
               cart.map((item, index) => (
                 <div key={index} className="flex items-center gap-3 bg-neutral-700 rounded-xl p-3">
-                  <img src={`http://localhost:5000/uploads/${item.image}`} alt={item.name} className="w-10 h-10 object-cover rounded-lg shrink-0" onError={(e) => { e.target.src = 'https://placehold.co/40x40/1a1a1a/666?text=No' }} />
+                  <img src={`https://sisig-babi-website-production.up.railway.app/uploads/${item.image}`} alt={item.name} className="w-10 h-10 object-cover rounded-lg shrink-0" onError={(e) => { e.target.src = 'https://placehold.co/40x40/1a1a1a/666?text=No' }} />
                   <div className="flex-1 min-w-0">
                     <p className="font-bold text-sm text-white truncate">{item.name}</p>
                     <p className="text-orange-400 text-xs font-bold">₱{(item.price * item.quantity).toFixed(2)}</p>
@@ -306,7 +306,7 @@ const POS = () => {
               ) : (
                 cart.map((item, index) => (
                   <div key={index} className="flex items-center gap-3 bg-neutral-700 rounded-xl p-3">
-                    <img src={`http://localhost:5000/uploads/${item.image}`} alt={item.name} className="w-10 h-10 object-cover rounded-lg shrink-0" onError={(e) => { e.target.src = 'https://placehold.co/40x40/1a1a1a/666?text=No' }} />
+                    <img src={`https://sisig-babi-website-production.up.railway.app/uploads/${item.image}`} alt={item.name} className="w-10 h-10 object-cover rounded-lg shrink-0" onError={(e) => { e.target.src = 'https://placehold.co/40x40/1a1a1a/666?text=No' }} />
                     <div className="flex-1 min-w-0">
                       <p className="font-bold text-sm text-white truncate">{item.name}</p>
                       <p className="text-orange-400 text-xs font-bold">₱{(item.price * item.quantity).toFixed(2)}</p>
