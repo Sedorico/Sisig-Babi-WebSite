@@ -107,7 +107,7 @@ const Menu = () => {
                 onClick={() => handleProductClick(product.id)}
               >
                 <img
-                  src={`https://sisig-babi-website-production.up.railway.app/uploads/${product.image}`}
+                  src={product.image}
                   alt={product.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => { e.target.src = 'https://placehold.co/400x300/1a1a1a/666?text=No+Image' }}

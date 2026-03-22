@@ -112,7 +112,7 @@ const Homepage = () => {
             key={heroIndex}
             className="absolute inset-0"
             style={{
-              backgroundImage: `url(https://sisig-babi-website-production.up.railway.app/uploads/${bestSellers[heroIndex]?.image})`,
+              backgroundImage: `url(${bestSellers[heroIndex]?.image})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               opacity: heroAnimating ? 0 : 1,
@@ -194,7 +194,7 @@ const Homepage = () => {
                 >
                   <div className="w-48 h-48 rounded-full overflow-hidden border-2 border-orange-400 shadow-lg">
                     <img
-                      src={`https://sisig-babi-website-production.up.railway.app/uploads/${featuredProducts[getRelativeIndex(-1)].image}`}
+                      src={featuredProducts[getRelativeIndex(-1)].image}
                       alt=""
                       className="w-full h-full object-cover"
                       onError={(e) => { e.target.src = 'https://placehold.co/200x200/1a1a1a/666?text=No+Image' }}
@@ -213,7 +213,7 @@ const Homepage = () => {
                   }}
                 >
                   <img
-                    src={`https://sisig-babi-website-production.up.railway.app/uploads/${currentProduct.image}`}
+                    src={currentProduct.image}
                     alt={currentProduct.name}
                     className="w-full h-full object-cover"
                     onError={(e) => { e.target.src = 'https://placehold.co/400x400/1a1a1a/666?text=No+Image' }}
@@ -256,7 +256,7 @@ const Homepage = () => {
                 >
                   <div className="w-48 h-48 rounded-full overflow-hidden border-2 border-orange-400 shadow-lg">
                     <img
-                      src={`https://sisig-babi-website-production.up.railway.app/uploads/${featuredProducts[getRelativeIndex(1)].image}`}
+                      src={featuredProducts[getRelativeIndex(1)].image}
                       alt=""
                       className="w-full h-full object-cover"
                       onError={(e) => { e.target.src = 'https://placehold.co/200x200/1a1a1a/666?text=No+Image' }}

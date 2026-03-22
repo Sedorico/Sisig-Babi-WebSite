@@ -94,7 +94,7 @@ const ProductPage = () => {
       <div className="max-w-4xl mx-auto px-4 py-10">
         <div className="bg-neutral-800 rounded-2xl border border-white/10 p-6 flex flex-col md:flex-row gap-8">
           <img
-            src={`https://sisig-babi-website-production.up.railway.app/uploads/${product.image}`}
+            src={product.image}
             alt={product.name}
             className="w-full md:w-72 h-64 object-cover rounded-xl"
             onError={(e) => { e.target.src = 'https://placehold.co/400x300/1a1a1a/666?text=No+Image' }}
