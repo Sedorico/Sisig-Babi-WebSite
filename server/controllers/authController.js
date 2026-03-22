@@ -78,20 +78,44 @@ const forgotPassword = async (req, res) => {
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
-      auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS }
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
     });
 
-    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
+    const resetLink = `https://sisig-babi-web-site.vercel.app/reset-password/${resetToken}`;
 
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+      from: `"Sisig Babi" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: 'Sisigan - Password Reset',
-      html: `<h2>Password Reset</h2><p>Click the link below to reset your password:</p><a href="${resetLink}">${resetLink}</a><p>This link expires in 1 hour.</p>`
+      subject: 'Sisig Babi - Password Reset',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #1a1a1a; color: #ffffff; border-radius: 12px;">
+          <div style="text-align: center; margin-bottom: 30px;">
+            <h1 style="color: #f97316; font-size: 28px; margin: 0;">Sisig Babi</h1>
+            <p style="color: #9ca3af; font-size: 14px;">Crispy. Savory. Delivered.</p>
+          </div>
+          <div style="background-color: #262626; padding: 24px; border-radius: 8px; margin-bottom: 24px;">
+            <h2 style="color: #ffffff; font-size: 20px; margin-top: 0;">Password Reset Request</h2>
+            <p style="color: #d1d5db;">Hi <strong>${user.name}</strong>,</p>
+            <p style="color: #d1d5db;">We received a request to reset your password. Click the button below to create a new password:</p>
+            <div style="text-align: center; margin: 30px 0;">
+              <a href="${resetLink}" style="background-color: #f97316; color: #ffffff; padding: 14px 32px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; display: inline-block;">Reset Password</a>
+            </div>
+            <p style="color: #9ca3af; font-size: 13px;">This link will expire in <strong>1 hour</strong>.</p>
+            <p style="color: #9ca3af; font-size: 13px;">If you did not request a password reset, please ignore this email.</p>
+          </div>
+          <div style="text-align: center;">
+            <p style="color: #6b7280; font-size: 12px;">© 2026 Sisig Babi. All rights reserved.</p>
+          </div>
+        </div>
+      `
     });
 
     res.json({ message: 'Password reset link sent to your email!' });
   } catch (err) {
+    console.error('forgotPassword error:', err);
     res.status(500).json({ message: 'Server error.', error: err.message });
   }
 };
