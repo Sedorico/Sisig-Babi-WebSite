@@ -1,14 +1,22 @@
 const db = require('../config/db');
 const multer = require('multer');
-const path = require('path');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+// Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Cloudinary storage instead of diskStorage
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'sisig-babi',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
   },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  }
 });
 
 const upload = multer({ storage });
@@ -51,7 +59,9 @@ const getProduct = async (req, res) => {
 const addProduct = async (req, res) => {
   try {
     const { name, price, category, is_featured, is_best_seller, is_available } = req.body;
-    const image = req.file ? req.file.filename : null;
+    
+    // Cloudinary returns full URL via req.file.path
+    const image = req.file ? req.file.path : null;
 
     if (!name || !price || !category) {
       return res.status(400).json({ message: 'Name, price, and category are required.' });
@@ -83,7 +93,9 @@ const addProduct = async (req, res) => {
 const editProduct = async (req, res) => {
   try {
     const { name, price, category, is_featured, is_best_seller, is_available } = req.body;
-    const image = req.file ? req.file.filename : null;
+    
+    // Cloudinary returns full URL via req.file.path
+    const image = req.file ? req.file.path : null;
 
     if (image) {
       await db.query(
