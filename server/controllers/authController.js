@@ -160,8 +160,3 @@ const banCustomer = async (req, res) => {
 };
 
 module.exports = { register, login, forgotPassword, resetPassword, getCustomers, banCustomer };
-```
-
-Tapos dagdag mo sa Railway Variables:
-```
-RESEND_API_KEY=re_DogVzcXE_938e8sqFKHvFGFsFFrpuxhYQ
