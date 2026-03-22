@@ -1,7 +1,9 @@
 const db = require('../config/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Register
 const register = async (req, res) => {
@@ -76,23 +78,10 @@ const forgotPassword = async (req, res) => {
     const user = users[0];
     const resetToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      },
-      tls: {
-        rejectUnauthorized: false
-      }
-    });
-
     const resetLink = `https://sisig-babi-web-site.vercel.app/reset-password/${resetToken}`;
 
-    await transporter.sendMail({
-      from: `"Sisig Babi" <${process.env.EMAIL_USER}>`,
+    await resend.emails.send({
+      from: 'Sisig Babi <onboarding@resend.dev>',
       to: email,
       subject: 'Sisig Babi - Password Reset',
       html: `
@@ -171,3 +160,8 @@ const banCustomer = async (req, res) => {
 };
 
 module.exports = { register, login, forgotPassword, resetPassword, getCustomers, banCustomer };
+```
+
+Tapos dagdag mo sa Railway Variables:
+```
+RESEND_API_KEY=re_DogVzcXE_938e8sqFKHvFGFsFFrpuxhYQ
