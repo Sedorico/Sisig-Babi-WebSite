@@ -42,7 +42,7 @@ const LandingPage = () => {
           key={heroIndex}
           className="absolute inset-0"
           style={{
-            backgroundImage: `url(https://sisig-babi-website-production.up.railway.app/uploads/${bestSellers[heroIndex]?.image})`,
+            backgroundImage: `url(${bestSellers[heroIndex]?.image})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             opacity: heroAnimating ? 0 : 1,
