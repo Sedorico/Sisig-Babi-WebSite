@@ -14,16 +14,17 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: '20'
 
     - name: Install Backend Dependencies
       run: |
         cd server
         npm install
 
-    - name: Install Frontend Dependencies
+    - name: Clean and Reinstall Frontend Dependencies
       run: |
         cd client
+        rm -rf node_modules package-lock.json
         npm install
 
     - name: Build Frontend
