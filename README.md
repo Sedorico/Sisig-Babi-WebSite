@@ -26,7 +26,7 @@ A full-stack e-commerce web application developed for a Filipino sisig restauran
 * Cloudinary (Image Upload)
 * Resend (Email Service)
 
----
+------------------------------------------------------------------
 
 ## 2. System Features
 
@@ -63,7 +63,7 @@ A full-stack e-commerce web application developed for a Filipino sisig restauran
 * Cloud-based image storage
 * Email-based password recovery system
 
----
+-------------------------------------------------------------------------------
 
 ## 3. Project Structure
 
