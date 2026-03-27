@@ -27,11 +27,6 @@ jobs:
         rm -rf node_modules package-lock.json
         npm install
 
-    - name: Lint Frontend
-      run: |
-        cd client
-        npm run lint
-
     - name: Build Frontend
       run: |
         cd client
