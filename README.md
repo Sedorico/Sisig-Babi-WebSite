@@ -1,4 +1,5 @@
-# Sisig Babi - E-Commerce Website
+# Sisig Babi - E-Commerce Website 
+
 
 A full-stack e-commerce web application developed for a Filipino sisig restaurant. The system enables customers to order food online while providing administrators with tools for managing products, orders, and customers.
 
