@@ -183,5 +183,9 @@ npm run dev
 
 ## 8. Developer Reference
 
-GitHub Repository:
-[https://github.com/Sedorico](https://github.com/Sedorico)
+Contributors
+- [@Sedorico](https://github.com/Sedorico)
+- [@seanwendelgarcia60-dotcom](https://github.com/seanwendelgarcia60-dotcom)
+- [@estaciocarlo](https://github.com/estaciocarlo)
+
+
