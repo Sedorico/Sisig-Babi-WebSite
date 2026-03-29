@@ -70,7 +70,7 @@ const LandingPage = () => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
-        />
+        >
       )}
 
       <div className="absolute inset-0 bg-black/70" />
