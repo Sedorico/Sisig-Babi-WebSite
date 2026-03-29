@@ -86,7 +86,7 @@ const LandingPage = () => {
         </div>
 
         <h1 className="text-4xl md:text-7xl font-black uppercase text-white mb-2">
-          SISIG <span className="text-orange-500">BABI</span>
+          SISILOG <span className="text-orange-500">BooBa</span>
         </h1>
         <p className="text-orange-200 text-sm md:text-lg mb-10 md:mb-16 uppercase tracking-widest">
           Crispy. Savory. Delivered.
