@@ -7,17 +7,22 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
+// CORS — allow both Vercel URLs
 app.use(cors({
-  origin: '*',
+  origin: [
+    'https://sisig-babi-web-site.vercel.app',
+    'https://sisigbabi.vercel.app',
+    'http://localhost:5173'
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Routes
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
@@ -26,18 +31,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 
-// Test route
 app.get('/', (req, res) => {
-  res.json({ 
-    message: 'Sisigan API is running! 🔥',
-    db_host: process.env.DB_HOST ? 'SET' : 'NOT SET',
-    db_user: process.env.DB_USER ? 'SET' : 'NOT SET',
-    db_name: process.env.DB_NAME ? 'SET' : 'NOT SET',
-    db_port: process.env.DB_PORT ? 'SET' : 'NOT SET',
-  });
+  res.json({ message: 'Sisigan API is running! 🔥' });
 });
 
-// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
